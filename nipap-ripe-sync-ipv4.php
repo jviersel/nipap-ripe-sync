@@ -7,27 +7,14 @@
  * This script requires PHP's XML- and CURL extensions and PEAR's XML_RCP2 library
  */
 
-$nipapUsername = '';					// Your NIPAP username
-$nipapPassword = '';					// Your NIPAP password
-$ripeDbPassword = '';					// Your RIPE-DB MD5 password
-$customerHandles = array(				// A List of RIPE-DB handles for your customers
-//	1 => 'JVI-RIPE',					// Example: Customer 1 has handle JVI-RIPE
-);
-$updatePrefixes = array(				// List of prefixes that need to be synced, script is fixed to /24
-	'192.168.0.0/24',					// Example
-	'192.168.1.0/24',					// Example
-);
-$netnameFormat = 'MYISP-CUSTOMER-%d';	// Format to use for your netname-attributes
-$defaultAdminC = array(					// List of default ADMIN-C contacts that needs to be added
-//	'JVI-RIPE',							// Example
-);
-$defaultTechC = array(					// List of default TECH-C contacts that needs to be added
-//	'JVI-RIPE',							// Example
-);
-$maintainer = 'VANIERSEL-MNT';			// RIPE-db maintainer for the objects
-$country = 'NL';						// Your countrycode
-$notifyContact = '';					// Email address RIPE should notify abount changes. Empty string for none
- 
+// Look if conif
+if ( ! file_exists( './nipap-ripe-sync-config.php' ) ) {
+    require_once './nipap-ripe-sync-config.php';
+} else {
+    die 'Config file does not exists. Did you remember to copy ./nipap-ripe-sync-config-sample.php to'+
+        './nipap-ripe-sync-config.php and edit the parameters';
+}
+
 // This script requires XML_RPC2, http://pear.php.net/package/XML_RPC2
 require_once 'XML/RPC2/Client.php';
 
