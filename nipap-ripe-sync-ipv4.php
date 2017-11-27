@@ -7,13 +7,14 @@
  * This script requires PHP's XML- and CURL extensions and PEAR's XML_RCP2 library
  */
 
-// Look if conif
+// Look if configuration file exists
 if ( ! file_exists( './nipap-ripe-sync-config.php' ) ) {
-    require_once './nipap-ripe-sync-config.php';
-} else {
     die 'Config file does not exists. Did you remember to copy ./nipap-ripe-sync-config-sample.php to' +
-        './nipap-ripe-sync-config.php and edit the parameters';
+        './nipap-ripe-sync-config.php ?';
 }
+
+// This is the file containing the all the configuration bits.
+require_once './nipap-ripe-sync-config.php';
 
 // This script requires XML_RPC2, http://pear.php.net/package/XML_RPC2
 require_once 'XML/RPC2/Client.php';
